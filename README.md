@@ -16,8 +16,8 @@ DeepDeep 插件开发的公开 Maven 仓库：托管插件契约 `plugin-api` �
 
 | 坐标 | 版本 | 说明 |
 | --- | --- | --- |
-| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.0` | 插件契约 SDK（AAR），当前 `PLUGIN_API_LEVEL = 5` |
-| `io.github.sadami3066.deepdeep:design` | `0.6.0` | 与 App 同源的 Compose 设计系统，版本独立维护 |
+| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.1` | 插件契约 SDK（AAR），当前 `PLUGIN_API_LEVEL = 5` |
+| `io.github.sadami3066.deepdeep:design` | `0.6.1` | 与 App 同源的 Compose 设计系统，版本独立维护 |
 
 `design` 通过 `plugin-api` 的 `api()` 传递，插件工程通常只需声明 `plugin-api`。
 
@@ -27,19 +27,19 @@ DeepDeep 插件开发的公开 Maven 仓库：托管插件契约 `plugin-api` �
 io/github/sadami3066/deepdeep/
 ├── plugin-api/
 │   ├── maven-metadata.xml
-│   └── 0.8.0/
-│       ├── plugin-api-0.8.0.aar
-│       ├── plugin-api-0.8.0.pom
-│       ├── plugin-api-0.8.0.module
-│       ├── plugin-api-0.8.0-sources.jar
+│   └── 0.8.1/
+│       ├── plugin-api-0.8.1.aar
+│       ├── plugin-api-0.8.1.pom
+│       ├── plugin-api-0.8.1.module
+│       ├── plugin-api-0.8.1-sources.jar
 │       └── *.md5 / *.sha1 / *.sha256 / *.sha512
 └── design/
     ├── maven-metadata.xml
-    └── 0.6.0/
-        ├── design-0.6.0.aar
-        ├── design-0.6.0.pom
-        ├── design-0.6.0.module
-        ├── design-0.6.0-sources.jar
+    └── 0.6.1/
+        ├── design-0.6.1.aar
+        ├── design-0.6.1.pom
+        ├── design-0.6.1.module
+        ├── design-0.6.1-sources.jar
         └── *.md5 / *.sha1 / *.sha256 / *.sha512
 ```
 
@@ -72,14 +72,14 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.0")
+    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.1")
 }
 ```
 
 `design` 已由 `plugin-api` 传递；需要显式写坐标时同样使用 `compileOnly`：
 
 ```kotlin
-compileOnly("io.github.sadami3066.deepdeep:design:0.6.0")
+compileOnly("io.github.sadami3066.deepdeep:design:0.6.1")
 ```
 
 插件与宿主共享同一份类（parent-first）。**宿主已提供的库一律用 `compileOnly`，不要用 `implementation`**：把 `plugin-api`、Compose 或协程打包进 `.ddp` 会与宿主重复并触发类冲突。
@@ -153,7 +153,7 @@ git clone https://github.com/Sadami3066/DeepDeep-Plugins
 cp -R DeepDeep-Plugins/template my-plugin
 ```
 
-模板已配置好本仓库地址、`pluginApiVersion = "0.8.0"` 与全套 `compileOnly` 依赖。改成自己的 `namespace` / `applicationId`、清单 `id` / `version` / `entryClass` 与包名后：
+模板已配置好本仓库地址、`pluginApiVersion = "0.8.1"` 与全套 `compileOnly` 依赖。改成自己的 `namespace` / `applicationId`、清单 `id` / `version` / `entryClass` 与包名后：
 
 ```bash
 ./gradlew generateSigningKey   # 首次生成 Ed25519 签名密钥，私钥不入库
@@ -169,8 +169,8 @@ cp -R DeepDeep-Plugins/template my-plugin
 ### 版本选择与升级
 
 - 插件工程通过 `pluginApiVersion`（或直接写版本号）锁定 `plugin-api`；宿主 SDK 升级时同步改版本并重新编译。
-- `plugin-api` 的发布版本（如 `0.8.0`）与契约等级 `PLUGIN_API_LEVEL`（当前 `5`）独立维护，版本号变化不必然改变等级。
-- `design` 版本独立（当前 `0.6.0`），由 `plugin-api` 传递，不要单独用 `implementation` 引入。
+- `plugin-api` 的发布版本（如 `0.8.1`）与契约等级 `PLUGIN_API_LEVEL`（当前 `5`）独立维护，版本号变化不必然改变等级。
+- `design` 版本独立（当前 `0.6.1`），由 `plugin-api` 传递，不要单独用 `implementation` 引入。
 - 升级前查看 [`docs/PLUGIN_DEV.md`](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/docs/PLUGIN_DEV.md) 与 [CHANGELOG](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/CHANGELOG.md)。
 
 ### 只读使用

@@ -16,8 +16,8 @@ Public Maven repository for DeepDeep plugin development: it hosts the plugin con
 
 | Coordinate | Version | Notes |
 | --- | --- | --- |
-| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.0` | Plugin contract SDK (AAR), current `PLUGIN_API_LEVEL = 5` |
-| `io.github.sadami3066.deepdeep:design` | `0.6.0` | Compose design system shared with the app, versioned independently |
+| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.1` | Plugin contract SDK (AAR), current `PLUGIN_API_LEVEL = 5` |
+| `io.github.sadami3066.deepdeep:design` | `0.6.1` | Compose design system shared with the app, versioned independently |
 
 `design` is exposed transitively through the `api()` configuration of `plugin-api`, so plugin projects normally only declare `plugin-api`.
 
@@ -27,19 +27,19 @@ Public Maven repository for DeepDeep plugin development: it hosts the plugin con
 io/github/sadami3066/deepdeep/
 ├── plugin-api/
 │   ├── maven-metadata.xml
-│   └── 0.8.0/
-│       ├── plugin-api-0.8.0.aar
-│       ├── plugin-api-0.8.0.pom
-│       ├── plugin-api-0.8.0.module
-│       ├── plugin-api-0.8.0-sources.jar
+│   └── 0.8.1/
+│       ├── plugin-api-0.8.1.aar
+│       ├── plugin-api-0.8.1.pom
+│       ├── plugin-api-0.8.1.module
+│       ├── plugin-api-0.8.1-sources.jar
 │       └── *.md5 / *.sha1 / *.sha256 / *.sha512
 └── design/
     ├── maven-metadata.xml
-    └── 0.6.0/
-        ├── design-0.6.0.aar
-        ├── design-0.6.0.pom
-        ├── design-0.6.0.module
-        ├── design-0.6.0-sources.jar
+    └── 0.6.1/
+        ├── design-0.6.1.aar
+        ├── design-0.6.1.pom
+        ├── design-0.6.1.module
+        ├── design-0.6.1-sources.jar
         └── *.md5 / *.sha1 / *.sha256 / *.sha512
 ```
 
@@ -72,14 +72,14 @@ You can also declare it only in a module's `repositories { maven { url = uri("ht
 
 ```kotlin
 dependencies {
-    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.0")
+    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.1")
 }
 ```
 
 `design` is already provided transitively by `plugin-api`; if you declare it explicitly, use `compileOnly` as well:
 
 ```kotlin
-compileOnly("io.github.sadami3066.deepdeep:design:0.6.0")
+compileOnly("io.github.sadami3066.deepdeep:design:0.6.1")
 ```
 
 Plugins and the host share the same classes (parent-first). **Any library the host already provides must be declared with `compileOnly`, not `implementation`**: bundling `plugin-api`, Compose or coroutines into the `.ddp` duplicates host classes and causes class conflicts.
@@ -153,7 +153,7 @@ git clone https://github.com/Sadami3066/DeepDeep-Plugins
 cp -R DeepDeep-Plugins/template my-plugin
 ```
 
-The template already points at this repository and pins `pluginApiVersion = "0.8.0"` with the full set of `compileOnly` dependencies. After changing its `namespace` / `applicationId`, the manifest `id` / `version` / `entryClass`, and the package name:
+The template already points at this repository and pins `pluginApiVersion = "0.8.1"` with the full set of `compileOnly` dependencies. After changing its `namespace` / `applicationId`, the manifest `id` / `version` / `entryClass`, and the package name:
 
 ```bash
 ./gradlew generateSigningKey   # create an Ed25519 signing key on first use; never commit the private key
@@ -169,8 +169,8 @@ Copy the `.ddp` to your phone and install it from "Plugins → Import plugin" in
 ### Version selection and upgrades
 
 - Pin `plugin-api` through `pluginApiVersion` (or a literal version) in your plugin project; when the host SDK is upgraded, update it and rebuild.
-- The published `plugin-api` version (such as `0.8.0`) and the contract level `PLUGIN_API_LEVEL` (currently `5`) are maintained independently; a version bump does not necessarily change the level.
-- `design` is versioned independently (currently `0.6.0`) and is provided transitively by `plugin-api`; do not add it with `implementation`.
+- The published `plugin-api` version (such as `0.8.1`) and the contract level `PLUGIN_API_LEVEL` (currently `5`) are maintained independently; a version bump does not necessarily change the level.
+- `design` is versioned independently (currently `0.6.1`) and is provided transitively by `plugin-api`; do not add it with `implementation`.
 - Before upgrading, read [`docs/PLUGIN_DEV.md`](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/docs/PLUGIN_DEV.md) and the [CHANGELOG](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/CHANGELOG.md).
 
 ### Read-only usage
