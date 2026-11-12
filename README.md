@@ -16,7 +16,7 @@ DeepDeep 插件开发的公开 Maven 仓库：托管插件契约 `plugin-api` �
 
 | 坐标 | 版本 | 说明 |
 | --- | --- | --- |
-| `io.github.sadami3066.deepdeep:plugin-api` | `0.7.0` | 插件契约 SDK（AAR），当前 `PLUGIN_API_LEVEL = 4` |
+| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.0` | 插件契约 SDK（AAR），当前 `PLUGIN_API_LEVEL = 5` |
 | `io.github.sadami3066.deepdeep:design` | `0.6.0` | 与 App 同源的 Compose 设计系统，版本独立维护 |
 
 `design` 通过 `plugin-api` 的 `api()` 传递，插件工程通常只需声明 `plugin-api`。
@@ -27,11 +27,11 @@ DeepDeep 插件开发的公开 Maven 仓库：托管插件契约 `plugin-api` �
 io/github/sadami3066/deepdeep/
 ├── plugin-api/
 │   ├── maven-metadata.xml
-│   └── 0.7.0/
-│       ├── plugin-api-0.7.0.aar
-│       ├── plugin-api-0.7.0.pom
-│       ├── plugin-api-0.7.0.module
-│       ├── plugin-api-0.7.0-sources.jar
+│   └── 0.8.0/
+│       ├── plugin-api-0.8.0.aar
+│       ├── plugin-api-0.8.0.pom
+│       ├── plugin-api-0.8.0.module
+│       ├── plugin-api-0.8.0-sources.jar
 │       └── *.md5 / *.sha1 / *.sha256 / *.sha512
 └── design/
     ├── maven-metadata.xml
@@ -72,7 +72,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.7.0")
+    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.0")
 }
 ```
 
@@ -153,7 +153,7 @@ git clone https://github.com/Sadami3066/DeepDeep-Plugins
 cp -R DeepDeep-Plugins/template my-plugin
 ```
 
-模板已配置好本仓库地址、`pluginApiVersion = "0.7.0"` 与全套 `compileOnly` 依赖。改成自己的 `namespace` / `applicationId`、清单 `id` / `version` / `entryClass` 与包名后：
+模板已配置好本仓库地址、`pluginApiVersion = "0.8.0"` 与全套 `compileOnly` 依赖。改成自己的 `namespace` / `applicationId`、清单 `id` / `version` / `entryClass` 与包名后：
 
 ```bash
 ./gradlew generateSigningKey   # 首次生成 Ed25519 签名密钥，私钥不入库
@@ -169,7 +169,7 @@ cp -R DeepDeep-Plugins/template my-plugin
 ### 版本选择与升级
 
 - 插件工程通过 `pluginApiVersion`（或直接写版本号）锁定 `plugin-api`；宿主 SDK 升级时同步改版本并重新编译。
-- `plugin-api` 的发布版本（如 `0.7.0`）与契约等级 `PLUGIN_API_LEVEL`（当前 `4`）独立维护，版本号变化不必然改变等级。
+- `plugin-api` 的发布版本（如 `0.8.0`）与契约等级 `PLUGIN_API_LEVEL`（当前 `5`）独立维护，版本号变化不必然改变等级。
 - `design` 版本独立（当前 `0.6.0`），由 `plugin-api` 传递，不要单独用 `implementation` 引入。
 - 升级前查看 [`docs/PLUGIN_DEV.md`](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/docs/PLUGIN_DEV.md) 与 [CHANGELOG](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/CHANGELOG.md)。
 
@@ -180,7 +180,7 @@ cp -R DeepDeep-Plugins/template my-plugin
 ### 与 App 插件 ABI 的关系
 
 - `plugin-api` 是宿主与插件之间的唯一 ABI 契约。插件实现 `DeepDeepPlugin`，由宿主在 App 进程内用内存 ClassLoader 装载，类解析 parent-first。
-- 宿主按清单 `apiLevel` 与支持范围（当前 `4..4`）决定是否装载插件；UI 另有 `HOST_UI_API_LEVEL = 1` 的兼容判定。
+- 宿主按清单 `apiLevel` 与支持范围（当前 `5..5`）决定是否装载插件；UI 另有 `HOST_UI_API_LEVEL = 1` 的兼容判定。
 - **发布前没有兼容承诺**：`plugin-api` 的公开类型与签名可能随版本删改而不提升 `PLUGIN_API_LEVEL`，升级后需用最新 SDK 重新编译；发布后才启用「同一等级只做加法，删改必须提升等级」的规则。
 - Compose 没有跨版本二进制 ABI 承诺：宿主与插件的 Kotlin / Compose 版本不一致时，只会禁用该插件的 UI，不影响插件其余部分。
 - 公开 ABI 由宿主工程中的 ABI 基线与 golden 清单固定；插件不要反射宿主内部实现。

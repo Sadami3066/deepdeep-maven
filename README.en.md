@@ -16,7 +16,7 @@ Public Maven repository for DeepDeep plugin development: it hosts the plugin con
 
 | Coordinate | Version | Notes |
 | --- | --- | --- |
-| `io.github.sadami3066.deepdeep:plugin-api` | `0.7.0` | Plugin contract SDK (AAR), current `PLUGIN_API_LEVEL = 4` |
+| `io.github.sadami3066.deepdeep:plugin-api` | `0.8.0` | Plugin contract SDK (AAR), current `PLUGIN_API_LEVEL = 5` |
 | `io.github.sadami3066.deepdeep:design` | `0.6.0` | Compose design system shared with the app, versioned independently |
 
 `design` is exposed transitively through the `api()` configuration of `plugin-api`, so plugin projects normally only declare `plugin-api`.
@@ -27,11 +27,11 @@ Public Maven repository for DeepDeep plugin development: it hosts the plugin con
 io/github/sadami3066/deepdeep/
 ├── plugin-api/
 │   ├── maven-metadata.xml
-│   └── 0.7.0/
-│       ├── plugin-api-0.7.0.aar
-│       ├── plugin-api-0.7.0.pom
-│       ├── plugin-api-0.7.0.module
-│       ├── plugin-api-0.7.0-sources.jar
+│   └── 0.8.0/
+│       ├── plugin-api-0.8.0.aar
+│       ├── plugin-api-0.8.0.pom
+│       ├── plugin-api-0.8.0.module
+│       ├── plugin-api-0.8.0-sources.jar
 │       └── *.md5 / *.sha1 / *.sha256 / *.sha512
 └── design/
     ├── maven-metadata.xml
@@ -72,7 +72,7 @@ You can also declare it only in a module's `repositories { maven { url = uri("ht
 
 ```kotlin
 dependencies {
-    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.7.0")
+    compileOnly("io.github.sadami3066.deepdeep:plugin-api:0.8.0")
 }
 ```
 
@@ -153,7 +153,7 @@ git clone https://github.com/Sadami3066/DeepDeep-Plugins
 cp -R DeepDeep-Plugins/template my-plugin
 ```
 
-The template already points at this repository and pins `pluginApiVersion = "0.7.0"` with the full set of `compileOnly` dependencies. After changing its `namespace` / `applicationId`, the manifest `id` / `version` / `entryClass`, and the package name:
+The template already points at this repository and pins `pluginApiVersion = "0.8.0"` with the full set of `compileOnly` dependencies. After changing its `namespace` / `applicationId`, the manifest `id` / `version` / `entryClass`, and the package name:
 
 ```bash
 ./gradlew generateSigningKey   # create an Ed25519 signing key on first use; never commit the private key
@@ -169,7 +169,7 @@ Copy the `.ddp` to your phone and install it from "Plugins → Import plugin" in
 ### Version selection and upgrades
 
 - Pin `plugin-api` through `pluginApiVersion` (or a literal version) in your plugin project; when the host SDK is upgraded, update it and rebuild.
-- The published `plugin-api` version (such as `0.7.0`) and the contract level `PLUGIN_API_LEVEL` (currently `4`) are maintained independently; a version bump does not necessarily change the level.
+- The published `plugin-api` version (such as `0.8.0`) and the contract level `PLUGIN_API_LEVEL` (currently `5`) are maintained independently; a version bump does not necessarily change the level.
 - `design` is versioned independently (currently `0.6.0`) and is provided transitively by `plugin-api`; do not add it with `implementation`.
 - Before upgrading, read [`docs/PLUGIN_DEV.md`](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/docs/PLUGIN_DEV.md) and the [CHANGELOG](https://github.com/Sadami3066/DeepDeep-Plugins/blob/master/CHANGELOG.md).
 
@@ -180,7 +180,7 @@ This repository is distribution only: files under `io/` are published artifacts,
 ### Relationship to the app plugin ABI
 
 - `plugin-api` is the single ABI contract between host and plugins. Plugins implement `DeepDeepPlugin` and are loaded by the host in the app process with an in-memory ClassLoader; class resolution is parent-first.
-- The host uses the manifest `apiLevel` and the supported range (currently `4..4`) to decide whether to load a plugin; UI has its own `HOST_UI_API_LEVEL = 1` compatibility check.
+- The host uses the manifest `apiLevel` and the supported range (currently `5..5`) to decide whether to load a plugin; UI has its own `HOST_UI_API_LEVEL = 1` compatibility check.
 - **There is no compatibility promise before release**: public types and signatures in `plugin-api` may change or be removed without raising `PLUGIN_API_LEVEL`, so rebuild against the latest SDK when upgrading. After release, the rule is "additive only within the same level; removals or changes require a level bump".
 - Compose has no binary ABI promise across versions: if host and plugin Kotlin / Compose versions differ, only that plugin's UI is disabled, not the rest of the plugin.
 - The public ABI is pinned by the ABI baseline and golden manifest in the host project; plugins must not reflect over host internals.
