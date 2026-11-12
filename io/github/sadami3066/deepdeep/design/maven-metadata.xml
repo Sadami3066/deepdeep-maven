@@ -3,11 +3,12 @@
   <groupId>io.github.sadami3066.deepdeep</groupId>
   <artifactId>design</artifactId>
   <versioning>
-    <latest>0.6.0</latest>
-    <release>0.6.0</release>
+    <latest>0.6.1</latest>
+    <release>0.6.1</release>
     <versions>
       <version>0.6.0</version>
+      <version>0.6.1</version>
     </versions>
-    <lastUpdated>20261109020132</lastUpdated>
+    <lastUpdated>20261112051908</lastUpdated>
   </versioning>
 </metadata>

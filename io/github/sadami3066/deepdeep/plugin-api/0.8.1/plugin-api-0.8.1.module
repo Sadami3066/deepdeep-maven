@@ -1,0 +1,182 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.sadami3066.deepdeep",
+    "module": "plugin-api",
+    "version": "0.8.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose",
+          "module": "compose-bom",
+          "version": {
+            "requires": "2026.03.00"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          }
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui"
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation"
+        },
+        {
+          "group": "androidx.compose.material3",
+          "module": "material3"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "io.github.sadami3066.deepdeep",
+          "module": "design",
+          "version": {
+            "requires": "0.6.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "plugin-api-0.8.1.aar",
+          "url": "plugin-api-0.8.1.aar",
+          "size": 296762,
+          "sha512": "e9e3248ba4b2d38ef792eaa35377a5cc526ebfa921a1eda6330ab0464e352ce9aee3337be5668dfc3a2109dda4e660785cf34019efa2cb883c9a519f3ea50746",
+          "sha256": "b35b56489dab6ee8f4e94409e3a94faf1e89d70bc02cc0b8ff9fb778798e8821",
+          "sha1": "58a17fa0d4dfe6695c1779a37ddabb00b913be05",
+          "md5": "3770e799d44b492cf773f0eb29fb38f4"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose",
+          "module": "compose-bom",
+          "version": {
+            "requires": "2026.03.00"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          }
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui"
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation"
+        },
+        {
+          "group": "androidx.compose.material3",
+          "module": "material3"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "io.github.sadami3066.deepdeep",
+          "module": "design",
+          "version": {
+            "requires": "0.6.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "plugin-api-0.8.1.aar",
+          "url": "plugin-api-0.8.1.aar",
+          "size": 296762,
+          "sha512": "e9e3248ba4b2d38ef792eaa35377a5cc526ebfa921a1eda6330ab0464e352ce9aee3337be5668dfc3a2109dda4e660785cf34019efa2cb883c9a519f3ea50746",
+          "sha256": "b35b56489dab6ee8f4e94409e3a94faf1e89d70bc02cc0b8ff9fb778798e8821",
+          "sha1": "58a17fa0d4dfe6695c1779a37ddabb00b913be05",
+          "md5": "3770e799d44b492cf773f0eb29fb38f4"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "plugin-api-0.8.1-sources.jar",
+          "url": "plugin-api-0.8.1-sources.jar",
+          "size": 16732,
+          "sha512": "76edb23c4260863c4691beadde0a1ce4995fe3483f7aef56c9fa40e077068757eb7d2025c28912b79dbaf601ea932a1b93052cd1ffdce37c464e52d51f2ef195",
+          "sha256": "e74ebf681a2ce4094ee03b098cde3887251820db9d76319d85655e1625489428",
+          "sha1": "bd09a4c8b144f5d0f664a7fc622d538e16a9378f",
+          "md5": "d8ce189b9b56f014fd60c7eac8368d60"
+        }
+      ]
+    }
+  ]
+}
